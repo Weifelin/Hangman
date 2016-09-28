@@ -4,6 +4,7 @@ import components.AppComponentsBuilder;
 import components.AppDataComponent;
 import components.AppFileComponent;
 import components.AppWorkspaceComponent;
+import controller.FileController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import propertymanager.PropertyManager;
@@ -21,6 +22,7 @@ import static settings.InitializationParameters.*;
 
 /**
  * @author Richard McKenna, Ritwik Banerjee
+ * @author Weifeng Lin
  */
 public abstract class AppTemplate extends Application {
 
@@ -30,6 +32,8 @@ public abstract class AppTemplate extends Application {
     private AppWorkspaceComponent workspaceComponent; // to manage the app's GUI workspace
     private AppGUI                gui;
 
+//    private FileController        controller;
+//
     public abstract AppComponentsBuilder makeAppBuilderHook();
 
     public AppDataComponent getDataComponent() {
@@ -48,7 +52,21 @@ public abstract class AppTemplate extends Application {
         return gui;
     }
 
-    @SuppressWarnings("unused")
+
+//    public void Controller(FileController controller){
+//        this.controller = controller;
+//    }
+
+//    public FileController getFileController(){
+//        return controller;
+//    }
+    public void setDataComponent(AppDataComponent component){
+        this.dataComponent = component;
+    }
+
+
+
+    //unsed
     public String getFileControllerClass() {
         return "AppFileController";
     }

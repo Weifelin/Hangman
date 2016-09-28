@@ -3,6 +3,7 @@ package gui;
 import apptemplate.AppTemplate;
 import components.AppWorkspaceComponent;
 import controller.HangmanController;
+import data.GameData;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -24,6 +25,7 @@ import static hangman.HangmanProperties.*;
  * This class serves as the GUI component for the Hangman game.
  *
  * @author Ritwik Banerjee
+ * @author Weifeng Lin
  */
 public class Workspace extends AppWorkspaceComponent {
 
@@ -31,7 +33,7 @@ public class Workspace extends AppWorkspaceComponent {
     AppGUI      gui; // the GUI inside which the application sits
 
     Label      guiHeadingLabel;   // workspace (GUI) heading label
-    HBox       headPane;          // conatainer to display the heading
+    HBox       headPane;          // container to display the heading
     HBox       bodyPane;          // container for the main game displays
     ToolBar    footToolbar;       // toolbar for game buttons
     BorderPane figurePane;        // container to display the namesake graphic of the (potentially) hanging person
@@ -39,6 +41,7 @@ public class Workspace extends AppWorkspaceComponent {
     HBox       guessedLetters;    // text area displaying all the letters guessed so far
     HBox       remainingGuessBox; // container to display the number of remaining guesses
     Button     startGame;         // the button to start playing a game of Hangman
+
 
     /**
      * Constructor for initializing the workspace, note that this constructor
@@ -55,6 +58,7 @@ public class Workspace extends AppWorkspaceComponent {
         setupHandlers(); // ... and set up event handling
     }
 
+
     private void layoutGUI() {
         PropertyManager propertyManager = PropertyManager.getManager();
         guiHeadingLabel = new Label(propertyManager.getPropertyValue(WORKSPACE_HEADING_LABEL));
@@ -63,11 +67,11 @@ public class Workspace extends AppWorkspaceComponent {
         headPane.getChildren().add(guiHeadingLabel);
         headPane.setAlignment(Pos.CENTER);
 
-        figurePane = new BorderPane();
+        figurePane = new BorderPane();      // container to display the namesake graphic of the (potentially) hanging person
         guessedLetters = new HBox();
         guessedLetters.setStyle("-fx-background-color: transparent;");
         remainingGuessBox = new HBox();
-        gameTextsPane = new VBox();
+        gameTextsPane = new VBox();         // container to display the text-related parts of the game
 
         gameTextsPane.getChildren().setAll(remainingGuessBox, guessedLetters);
 
@@ -86,7 +90,11 @@ public class Workspace extends AppWorkspaceComponent {
     }
 
     private void setupHandlers() {
-        HangmanController controller = new HangmanController(app, startGame);
+        //app.setController(app, startGame);
+//        HangmanController controller = new HangmanController(app, startGame);
+//        HangmanController controller = (HangmanController) app.getFileController();
+//        controller.setGameButton(startGame);
+        HangmanController controller = (HangmanController) gui.getFileController();
         startGame.setOnMouseClicked(e -> controller.start());
     }
 
@@ -114,12 +122,13 @@ public class Workspace extends AppWorkspaceComponent {
     /** This function reloads the entire workspace */
     @Override
     public void reloadWorkspace() {
-
+       GameData data= (GameData)app.getDataComponent();
     }
 
     public VBox getGameTextsPane() {
         return gameTextsPane;
     }
+
 
     public HBox getRemainingGuessBox() {
         return remainingGuessBox;

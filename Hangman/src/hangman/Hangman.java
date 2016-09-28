@@ -5,14 +5,19 @@ import components.AppComponentsBuilder;
 import components.AppDataComponent;
 import components.AppFileComponent;
 import components.AppWorkspaceComponent;
+import controller.FileController;
+import controller.HangmanController;
 import data.GameData;
 import data.GameDataFile;
 import gui.Workspace;
 
 /**
  * @author Ritwik Banerjee
+ * @author Weifeng Lin
  */
 public class Hangman extends AppTemplate {
+
+
 
     public static void main(String[] args) {
         launch(args);
@@ -21,6 +26,12 @@ public class Hangman extends AppTemplate {
     public String getFileControllerClass() {
         return "HangmanController";
     }
+
+//    public HangmanController getFileController(){
+//        return new HangmanController(this);
+//    }
+
+
 
     @Override
     public AppComponentsBuilder makeAppBuilderHook() {
@@ -39,6 +50,8 @@ public class Hangman extends AppTemplate {
             public AppWorkspaceComponent buildWorkspaceComponent() throws Exception {
                 return new Workspace(Hangman.this);
             }
+
+
         };
     }
 }

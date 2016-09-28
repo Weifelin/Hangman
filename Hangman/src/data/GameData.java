@@ -1,6 +1,7 @@
 package data;
 
 import apptemplate.AppTemplate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import components.AppDataComponent;
 import controller.GameError;
 
@@ -14,8 +15,10 @@ import java.util.Random;
 import java.util.Set;
 import java.util.stream.Stream;
 
+
 /**
  * @author Ritwik Banerjee
+ * @author  Weifeng Lin
  */
 public class GameData implements AppDataComponent {
 
@@ -25,7 +28,10 @@ public class GameData implements AppDataComponent {
     private String         targetWord;
     private Set<Character> goodGuesses;
     private Set<Character> badGuesses;
+
     private int            remainingGuesses;
+
+    @JsonIgnore
     public  AppTemplate    appTemplate;
 
     public GameData(AppTemplate appTemplate) {
@@ -36,6 +42,22 @@ public class GameData implements AppDataComponent {
         this.remainingGuesses = TOTAL_NUMBER_OF_GUESSES_ALLOWED;
     }
 
+    public GameData(){
+//        this.appTemplate = getAppTemplate();
+    }
+
+    public void setAppTemplate(AppTemplate appTemplate){
+        this.appTemplate = appTemplate;
+    }
+
+    public void setRemainingGuesses(int remainingGuesses){
+        this.remainingGuesses = remainingGuesses;
+    }
+
+
+    private AppTemplate getAppTemplate(){
+        return appTemplate;
+    }
     @Override
     public void reset() {
         this.targetWord = null;

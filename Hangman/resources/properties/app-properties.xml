@@ -58,7 +58,7 @@
         <property name="SAVE_UNSAVED_WORK_MESSAGE" value="Would you like to save your progress so far?"/>
         <property name="SAVE_UNSAVED_WORK_TITLE" value="Save progress?"/>
 
-        <property name="WORK_FILE_EXT" value="json"/>
+        <property name="WORK_FILE_EXT" value="*.json"/>
         <property name="WORK_FILE_EXT_DESC" value="Game File"/>
         <property name="SAVE_WORK_TITLE" value="Save"/>
         <property name="LOAD_WORK_TITLE" value="Select file to load"/>

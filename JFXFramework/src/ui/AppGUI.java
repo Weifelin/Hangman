@@ -12,10 +12,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import propertymanager.PropertyManager;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,6 +39,7 @@ import static settings.InitializationParameters.APP_IMAGEDIR_PATH;
  * include the workspace, which should be customizable and application dependent.
  *
  * @author Richard McKenna, Ritwik Banerjee
+ * @author Weifeng Lin
  */
 public class AppGUI implements AppStyleArbiter {
 
@@ -51,7 +56,8 @@ public class AppGUI implements AppStyleArbiter {
 
     private int appSpecificWindowWidth;  // optional parameter for window width that can be set by the application
     private int appSpecificWindowHeight; // optional parameter for window height that can be set by the application
-    
+
+    public FileController getFileController() {return fileController;}
     /**
      * This constructor initializes the file toolbar for use.
      *
@@ -78,6 +84,14 @@ public class AppGUI implements AppStyleArbiter {
     public FlowPane getToolbarPane() { return toolbarPane; }
 
     public BorderPane getAppPane() { return appPane; }
+
+    public Button getSaveButton(){
+        return saveButton;
+    }
+
+    public Button getNewButton(){
+        return newButton;
+    }
     
     /**
      * Accessor method for getting this application's primary stage's,
@@ -232,4 +246,16 @@ public class AppGUI implements AppStyleArbiter {
     public void initStyle() {
         // currently, we do not provide any stylization at the framework-level
     }
+
+    public Stage getErrorPop(String message){
+        Stage error = new Stage();
+        error.initModality(Modality.APPLICATION_MODAL);
+        error.initOwner(primaryStage);
+        VBox info = new VBox(20);
+        info.getChildren().add(new Text(message));
+        Scene errScene = new Scene(info, 300, 200);
+        error.setScene(errScene);
+        return error;
+    }
+
 }

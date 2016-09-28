@@ -1,14 +1,20 @@
 package data;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import components.AppDataComponent;
 import components.AppFileComponent;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 
 /**
  * @author Ritwik Banerjee
+ * @author Weifeng Lin
  */
+//@JsonIgnoreProperties({"appTemplate"})
+
+
 public class GameDataFile implements AppFileComponent {
 
     public static final String TARGET_WORD  = "TARGET_WORD";
@@ -18,10 +24,27 @@ public class GameDataFile implements AppFileComponent {
     @Override
     public void saveData(AppDataComponent data, Path to) {
 
+
+        ObjectMapper toSave = new ObjectMapper();
+        toSave.writerWithDefaultPrettyPrinter();
+        try {
+
+            toSave.writeValue(new File(String.valueOf(to)),data);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
+
     @Override
-    public void loadData(AppDataComponent data, Path from) throws IOException {
+    public AppDataComponent loadData(AppDataComponent data, Path from) throws IOException {
+        ObjectMapper toLoad = new ObjectMapper();
+        GameData data1= (GameData)data;
+        AppDataComponent file = toLoad.readValue(new File(String.valueOf(from)), data1.getClass());
+        return file;
+        //toLoad.readValue
+
 
     }
 

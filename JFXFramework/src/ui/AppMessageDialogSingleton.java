@@ -20,6 +20,7 @@ import settings.InitializationParameters;
  * @author Richard McKenna, Ritwik Banerjee
  * @author ?
  * @version 1.0
+ * @author Weifeng Lin
  */
 public class AppMessageDialogSingleton extends Stage {
 
@@ -92,6 +93,21 @@ public class AppMessageDialogSingleton extends Stage {
         // AND OPEN UP THIS DIALOG, MAKING SURE THE APPLICATION
         // WAITS FOR IT TO BE RESOLVED BEFORE LETTING THE USER
         // DO MORE WORK.
+        //showAndWait();
         showAndWait();
+    }
+
+    public void showEnd(String title, String message) {
+        // SET THE DIALOG TITLE BAR TITLE
+        setTitle(title);
+
+        // SET THE MESSAGE TO DISPLAY TO THE USER
+        messageLabel.setText(message);
+
+        // AND OPEN UP THIS DIALOG, MAKING SURE THE APPLICATION
+        // WAITS FOR IT TO BE RESOLVED BEFORE LETTING THE USER
+        // DO MORE WORK.
+        //showAndWait();
+        show();
     }
 }

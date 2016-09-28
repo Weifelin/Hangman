@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 /**
  * @author Richard McKenna, Ritwik Banerjee
+ * @author Weifeng Lin
  */
 public class YesNoCancelDialogSingleton extends Stage {
     // HERE'S THE SINGLETON

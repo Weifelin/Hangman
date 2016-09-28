@@ -6,6 +6,7 @@ package settings;
  *
  * @author Richard McKenna, Ritwik Banerjee
  * @author ?
+ * @author Weifeng Lin
  * @version 1.0
  */
 @SuppressWarnings("unused")
@@ -35,6 +36,8 @@ public enum AppPropertyType {
     NEW_ERROR_MESSAGE,
     SAVE_ERROR_MESSAGE,
     PROPERTIES_LOAD_ERROR_MESSAGE,
+    LOAD_ERROR_TITLE,
+    LOAD_ERROR_MESSAGE,
 
     // ERROR TITLES
     NEW_ERROR_TITLE,
@@ -48,9 +51,14 @@ public enum AppPropertyType {
     SAVE_COMPLETED_TITLE,
     SAVE_UNSAVED_WORK_TITLE,
     SAVE_UNSAVED_WORK_MESSAGE,
+    WIN_LABEL_MESSAGE,
+    LOST_LABEL_MESSAGE,
 
+    WIN_LABEL_TITLE,
+    LOST_LABEL_TITLE,
     SAVE_WORK_TITLE,
-    WORK_FILE_EXT,
+    LOAD_WORK_TITLE,
+    WORK_FILE_EXT ,
     WORK_FILE_EXT_DESC,
     PROPERTIES_
 }
