@@ -42,9 +42,9 @@ public class GameData implements AppDataComponent {
         this.remainingGuesses = TOTAL_NUMBER_OF_GUESSES_ALLOWED;
     }
 
-    public GameData(){
-//        this.appTemplate = getAppTemplate();
-    }
+//    public GameData(){
+////        this.appTemplate = getAppTemplate();
+//    }
 
     public void setAppTemplate(AppTemplate appTemplate){
         this.appTemplate = appTemplate;
@@ -65,6 +65,7 @@ public class GameData implements AppDataComponent {
         this.badGuesses = new HashSet<>();
         this.remainingGuesses = TOTAL_NUMBER_OF_GUESSES_ALLOWED;
         appTemplate.getWorkspaceComponent().reloadWorkspace();
+
     }
 
     public String getTargetWord() {

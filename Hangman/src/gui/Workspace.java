@@ -5,15 +5,14 @@ import components.AppWorkspaceComponent;
 import controller.HangmanController;
 import data.GameData;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToolBar;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import propertymanager.PropertyManager;
 import ui.AppGUI;
 
@@ -42,6 +41,8 @@ public class Workspace extends AppWorkspaceComponent {
     HBox       remainingGuessBox; // container to display the number of remaining guesses
     Button     startGame;         // the button to start playing a game of Hangman
 
+    HBox     goodAndBadGuessesLabel;
+    GridPane goodAndBadGuesses;
 
     /**
      * Constructor for initializing the workspace, note that this constructor
@@ -68,15 +69,27 @@ public class Workspace extends AppWorkspaceComponent {
         headPane.setAlignment(Pos.CENTER);
 
         figurePane = new BorderPane();      // container to display the namesake graphic of the (potentially) hanging person
+
+
+
         guessedLetters = new HBox();
         guessedLetters.setStyle("-fx-background-color: transparent;");
+
         remainingGuessBox = new HBox();
+
         gameTextsPane = new VBox();         // container to display the text-related parts of the game
 
-        gameTextsPane.getChildren().setAll(remainingGuessBox, guessedLetters);
+        //good and bad guesses
+        goodAndBadGuessesLabel = new HBox();
+
+        goodAndBadGuesses = new GridPane();
+        //gameTextsPane.getChildren().addAll(remainingGuessBox, guessedLetters, goodAndBadGuessesLabel, goodAndBadGuesses);
+        gameTextsPane.getChildren().setAll(remainingGuessBox, guessedLetters, goodAndBadGuessesLabel, goodAndBadGuesses);
+
 
         bodyPane = new HBox();
         bodyPane.getChildren().addAll(figurePane, gameTextsPane);
+        bodyPane.setPadding(new Insets(1,0,1,gui.getSaveButton().snappedLeftInset()));
 
         startGame = new Button("Start Playing");
         HBox blankBoxLeft  = new HBox();
@@ -95,6 +108,7 @@ public class Workspace extends AppWorkspaceComponent {
 //        HangmanController controller = (HangmanController) app.getFileController();
 //        controller.setGameButton(startGame);
         HangmanController controller = (HangmanController) gui.getFileController();
+        controller.setGameButton(startGame);
         startGame.setOnMouseClicked(e -> controller.start());
     }
 
@@ -143,7 +157,9 @@ public class Workspace extends AppWorkspaceComponent {
         guessedLetters.setStyle("-fx-background-color: transparent;");
         remainingGuessBox = new HBox();
         gameTextsPane = new VBox();
-        gameTextsPane.getChildren().setAll(remainingGuessBox, guessedLetters);
+        gameTextsPane.getChildren().setAll(remainingGuessBox, guessedLetters, goodAndBadGuessesLabel, goodAndBadGuesses);
         bodyPane.getChildren().setAll(figurePane, gameTextsPane);
     }
+
+
 }
