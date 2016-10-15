@@ -228,6 +228,12 @@ public class HangmanController implements FileController {
             public void handle(long now) {
                 appTemplate.getGUI().getPrimaryScene().setOnKeyTyped((KeyEvent event) -> {
                     char guess = event.getCharacter().charAt(0);
+                    if (!Character.isLetter(guess))
+                        return;
+
+
+
+
                     if (!alreadyGuessed(guess)) {
                         boolean goodguess = false;
                         for (int i = 0; i < progress.length; i++) {
@@ -249,6 +255,13 @@ public class HangmanController implements FileController {
                             int alphaOrder = (int) capitilized - 65;
                             squares[alphaOrder].setFill(Color.RED);
                             squares[alphaOrder].setBlendMode(BlendMode.SOFT_LIGHT);
+
+                            for (int bads=0; bads < (gamedata.TOTAL_NUMBER_OF_GUESSES_ALLOWED-gamedata.getRemainingGuesses()); bads++){
+                                Workspace gameWorkspace = (Workspace) appTemplate.getWorkspaceComponent();
+                                gameWorkspace.getHangmancomponents().getChildren().get(bads).setVisible(true);
+                            }
+
+
                         }
                         success = (discovered == progress.length);
                         remains.setText(Integer.toString(gamedata.getRemainingGuesses()));
@@ -286,15 +299,21 @@ public class HangmanController implements FileController {
                 makenew = true;
 
                 if (saveOrNot == 2){
+                    //makenew = false;
                     gameover = true;
+                }
+                if (saveOrNot == 0){
+                    makenew = false;
+                    gameover = false;
                 }
 
             } catch (IOException e) {
                 messageDialog.show(propertyManager.getPropertyValue(NEW_ERROR_TITLE), propertyManager.getPropertyValue(NEW_ERROR_MESSAGE));
             }
         if (makenew) {
+
             appTemplate.getDataComponent().reset();                // reset the data (should be reflected in GUI)
-            appTemplate.getWorkspaceComponent().reloadWorkspace(); // load data into workspace
+            //appTemplate.getWorkspaceComponent().reloadWorkspace(); // load data into workspace
             ensureActivatedWorkspace();                            // ensure workspace is activated
             workFile = null;                                       // new workspace has never been saved to a file
 

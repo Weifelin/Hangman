@@ -72,13 +72,34 @@ public class GameData implements AppDataComponent {
         return targetWord;
     }
 
+    /*
+        check if the potential target word contains non-alpha letters. False if contains
+     */
+    private boolean isWord(String potentialTarget){
+        for (int i=0; i<potentialTarget.length();i++){
+            int asciiCode = (int) potentialTarget.charAt(i);
+            if (asciiCode<65 || asciiCode>122){
+                return false;
+            }else if (asciiCode > 90 && asciiCode < 97){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     private String setTargetWord() {
         URL wordsResource = getClass().getClassLoader().getResource("words/words.txt");
         assert wordsResource != null;
 
         int toSkip = new Random().nextInt(TOTAL_NUMBER_OF_STORED_WORDS);
         try (Stream<String> lines = Files.lines(Paths.get(wordsResource.toURI()))) {
-            return lines.skip(toSkip).findFirst().get();
+            String potentialTarget = lines.skip(toSkip).findFirst().get();
+            while (!isWord(potentialTarget)){
+                toSkip = new Random().nextInt(TOTAL_NUMBER_OF_STORED_WORDS);
+                potentialTarget = lines.skip(toSkip).findFirst().get();
+            }
+            return potentialTarget;
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
             System.exit(1);
