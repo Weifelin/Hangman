@@ -44,7 +44,8 @@ public class Workspace extends AppWorkspaceComponent {
 
     Label      guiHeadingLabel;   // workspace (GUI) heading label
     HBox       headPane;          // container to display the heading
-    HBox       bodyPane;          // container for the main game displays
+    //HBox       bodyPane;          // container for the main game displays
+    BorderPane  bodyPane;
     ToolBar    footToolbar;       // toolbar for game buttons
     //BorderPane figurePane;        // container to display the namesake graphic of the (potentially) hanging person
     StackPane  figurePane;
@@ -85,6 +86,7 @@ public class Workspace extends AppWorkspaceComponent {
         headPane = new HBox();
         headPane.getChildren().add(guiHeadingLabel);
         headPane.setAlignment(Pos.CENTER);
+        headPane.setPadding(new Insets(10,0,20,0));
 
         //figurePane = new BorderPane();      // container to display the namesake graphic of the (potentially) hanging person
         figurePane = new StackPane();
@@ -110,9 +112,14 @@ public class Workspace extends AppWorkspaceComponent {
         gameTextsPane.getChildren().setAll(remainingGuessBox, guessedLetters, goodAndBadGuessesLabel, goodAndBadGuesses, hint);
 
 
-        bodyPane = new HBox();
-        bodyPane.getChildren().addAll(figurePane, gameTextsPane);
-        bodyPane.setPadding(new Insets(1,0,1,gui.getSaveButton().snappedLeftInset()));
+
+        //bodyPane = new HBox();
+        bodyPane = new BorderPane();
+        bodyPane.setLeft(figurePane);
+        bodyPane.setRight(gameTextsPane);
+        //bodyPane.getChildren().addAll(figurePane, gameTextsPane);
+
+        //bodyPane.setPadding(new Insets(20, gui.getSaveButton().snappedLeftInset()+5,5,gui.getSaveButton().snappedLeftInset()));
 
         startGame = new Button("Start Playing");
         HBox blankBoxLeft  = new HBox();
@@ -121,9 +128,14 @@ public class Workspace extends AppWorkspaceComponent {
         HBox.setHgrow(blankBoxRight, Priority.ALWAYS);
         footToolbar = new ToolBar(blankBoxLeft, startGame, blankBoxRight);
 
-        //workspace = new VBox();
+
+        //workspace = new BorderPane();
         workspace = new VBox();
         workspace.getChildren().addAll(headPane, bodyPane, footToolbar);
+
+        gui.getWindow().setMaxHeight(690);
+        gui.getWindow().setMaxWidth(890);
+        gui.getWindow().setResizable(false);
     }
 
     private void setupHandlers() {
@@ -154,6 +166,8 @@ public class Workspace extends AppWorkspaceComponent {
 
         workspace.getStyleClass().add(CLASS_BORDERED_PANE);
         guiHeadingLabel.getStyleClass().setAll(propertyManager.getPropertyValue(HEADING_LABEL));
+
+
 
     }
 
@@ -189,19 +203,27 @@ public class Workspace extends AppWorkspaceComponent {
 
         guessedLetters = new HBox();
         guessedLetters.setStyle("-fx-background-color: transparent;");
+        guessedLetters.setPadding(new Insets(0,0,20,0));
         remainingGuessBox = new HBox();
+        remainingGuessBox.setPadding(new Insets(0,0,10,0));
         gameTextsPane = new VBox();
         //figurePane = new BorderPane();      // container to display the namesake graphic of the (potentially) hanging person
         //figurePane = new StackPane();
 
         goodAndBadGuessesLabel = new HBox();
+        goodAndBadGuessesLabel.setPadding(new Insets(0,0,10,0));
         goodAndBadGuesses = new GridPane();
+        goodAndBadGuesses.setPadding(new Insets(0,0,20,0));
         //hint = new Button("Hint");
         //hint.setVisible(true);
         //renderHangman();
+        //hint.setPadding(new Insets(0,0,20,0));
         gameTextsPane.getChildren().setAll(remainingGuessBox, guessedLetters, goodAndBadGuessesLabel, goodAndBadGuesses, hint);
+        gameTextsPane.setPadding(new Insets(0, 30,0,0));
 
-        bodyPane.getChildren().setAll(figurePane, gameTextsPane);
+        //bodyPane.getChildren().setAll(figurePane, gameTextsPane);
+        bodyPane.setLeft(figurePane);
+        bodyPane.setRight(gameTextsPane);
         //bodyPane.getChildren().addAll(figurePane, gameTextsPane);
         bodyPane.setPadding(new Insets(1,0,1,gui.getSaveButton().snappedLeftInset()));
     }
