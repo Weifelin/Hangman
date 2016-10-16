@@ -21,9 +21,9 @@
         <!-- HEADINGS AND PROMPTS -->
         <property name="WORKSPACE_HEADING_LABEL" value="Hangman"/>
         <property name="WIN_LABEL_MESSAGE" value="You win!"/>
-        <property name="LOST_LABEL_MESSAGE" value="Ah, close but not quite there. The word was "/>
+        <property name="LOST_LABEL_MESSAGE" value=" Ah, close but not quite there :("/>
         <property name="WIN_LABEL_TITLE" value="WIN :)"/>
-        <property name="LOST_LABEL_TITLE" value="LOST :("/>
+        <property name="LOST_LABEL_TITLE" value="LOST"/>
         <property name="GOOD_AND_BAD_GUESSES_LABEL" value="Blue for Good Guesses / Red for Bad Guesses"/>
 
         <!-- TABLE COLUMN HEADINGS -->

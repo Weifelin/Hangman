@@ -60,6 +60,7 @@ public class Workspace extends AppWorkspaceComponent {
     //ArrayList<Shape> hangmancomponents;
     //Shape[]     hangmancomponents;
     Pane    hangmancomponents;
+    Button      hint;
 
     /**
      * Constructor for initializing the workspace, note that this constructor
@@ -97,13 +98,16 @@ public class Workspace extends AppWorkspaceComponent {
         remainingGuessBox = new HBox();
 
         gameTextsPane = new VBox();         // container to display the text-related parts of the game
+        getGameTextsPane().setSpacing(5);
 
+        hint      = new Button("Hint");
+        hint.setVisible(false);
         //good and bad guesses
         goodAndBadGuessesLabel = new HBox();
 
         goodAndBadGuesses = new GridPane();
         //gameTextsPane.getChildren().addAll(remainingGuessBox, guessedLetters, goodAndBadGuessesLabel, goodAndBadGuesses);
-        gameTextsPane.getChildren().setAll(remainingGuessBox, guessedLetters, goodAndBadGuessesLabel, goodAndBadGuesses);
+        gameTextsPane.getChildren().setAll(remainingGuessBox, guessedLetters, goodAndBadGuessesLabel, goodAndBadGuesses, hint);
 
 
         bodyPane = new HBox();
@@ -172,6 +176,10 @@ public class Workspace extends AppWorkspaceComponent {
         return startGame;
     }
 
+    public Button getHintButton() {
+        return hint;
+    }
+
     public void reinitialize() {
 
         //reinitialize hangmancomponent
@@ -188,8 +196,10 @@ public class Workspace extends AppWorkspaceComponent {
 
         goodAndBadGuessesLabel = new HBox();
         goodAndBadGuesses = new GridPane();
+        //hint = new Button("Hint");
+        //hint.setVisible(true);
         //renderHangman();
-        gameTextsPane.getChildren().setAll(remainingGuessBox, guessedLetters, goodAndBadGuessesLabel, goodAndBadGuesses);
+        gameTextsPane.getChildren().setAll(remainingGuessBox, guessedLetters, goodAndBadGuessesLabel, goodAndBadGuesses, hint);
 
         bodyPane.getChildren().setAll(figurePane, gameTextsPane);
         //bodyPane.getChildren().addAll(figurePane, gameTextsPane);
@@ -312,6 +322,14 @@ public class Workspace extends AppWorkspaceComponent {
 
     public Pane getHangmancomponents(){
         return hangmancomponents;
+    }
+
+    public void setHintButtonVisable(boolean hintButtonVisable){
+        this.hint.setVisible(hintButtonVisable);
+    }
+
+    public void setHintButtonDisabled(boolean hintButtonDisabled){
+        this.hint.setDisable(hintButtonDisabled);
     }
 
 }

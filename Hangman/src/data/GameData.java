@@ -30,6 +30,9 @@ public class GameData implements AppDataComponent {
     private Set<Character> badGuesses;
 
     private int            remainingGuesses;
+    private boolean        hintButtonDisabled;
+    private boolean        hintButtonVisable;
+            ;
 
     @JsonIgnore
     public  AppTemplate    appTemplate;
@@ -40,6 +43,13 @@ public class GameData implements AppDataComponent {
         this.goodGuesses = new HashSet<>();
         this.badGuesses = new HashSet<>();
         this.remainingGuesses = TOTAL_NUMBER_OF_GUESSES_ALLOWED;
+        this.hintButtonDisabled = true;
+        this.hintButtonVisable = false;
+
+    }
+
+    public GameData(){
+
     }
 
 //    public GameData(){
@@ -58,12 +68,15 @@ public class GameData implements AppDataComponent {
     private AppTemplate getAppTemplate(){
         return appTemplate;
     }
+
     @Override
     public void reset() {
         this.targetWord = null;
         this.goodGuesses = new HashSet<>();
         this.badGuesses = new HashSet<>();
         this.remainingGuesses = TOTAL_NUMBER_OF_GUESSES_ALLOWED;
+        hintButtonVisable = false;
+        hintButtonDisabled = true;
         appTemplate.getWorkspaceComponent().reloadWorkspace();
 
     }
@@ -148,5 +161,18 @@ public class GameData implements AppDataComponent {
         }
     }
 
+    public void setHintButtonDisabled(boolean hintButtonDisabled){
+        this.hintButtonDisabled = hintButtonDisabled;
+    }
 
+    public boolean getHintButtonDisabled(){
+        return hintButtonDisabled;
+    }
+    public void setHintButtonVisable(boolean hintButtonVisable){
+        this.hintButtonVisable = hintButtonVisable;
+    }
+
+    public boolean getHintButtonVisable(){
+        return hintButtonVisable;
+    }
 }

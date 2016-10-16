@@ -41,12 +41,18 @@ public class GameDataFile implements AppFileComponent {
     public AppDataComponent loadData(AppDataComponent data, Path from) throws IOException {
         ObjectMapper toLoad = new ObjectMapper();
         GameData data1= (GameData)data;
-        AppDataComponent file = toLoad.readValue(new File(String.valueOf(from)), data1.getClass());
+        GameData file = toLoad.readValue(new File(String.valueOf(from)), data1.getClass());
         return file;
         //toLoad.readValue
 
 
     }
+
+//    public GameData loadData(GameData data, Path from) throws IOException{
+//        ObjectMapper toLoad = new ObjectMapper();
+//        GameData gameData = toLoad.readValue(new File(String.valueOf(from)), data.getClass());
+//        return gameData;
+//    }
 
     /** This method will be used if we need to export data into other formats. */
     @Override
