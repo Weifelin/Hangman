@@ -393,6 +393,7 @@ public class HangmanController implements FileController {
         AppMessageDialogSingleton messageDialog   = AppMessageDialogSingleton.getSingleton();
         PropertyManager           propertyManager = PropertyManager.getManager();
         boolean                   makenew         = true;
+        boolean                   restart         = false;
         int saveOrNot;
         if (savable)
             try {
@@ -402,8 +403,9 @@ public class HangmanController implements FileController {
                 makenew = true;
 
                 if (saveOrNot == 2){
-                    //makenew = false;
-                    gameover = true;
+                    makenew = false;
+                    restart = true;
+                    gameover = false;
                 }
                 if (saveOrNot == 0){
                     makenew = false;
@@ -441,6 +443,23 @@ public class HangmanController implements FileController {
             enableGameButton();
         }
 
+        if (restart) {
+
+            appTemplate.getDataComponent().reset();                // reset the data (should be reflected in GUI)
+            //appTemplate.getWorkspaceComponent().reloadWorkspace(); // load data into workspace
+            ensureActivatedWorkspace();                            // ensure workspace is activated
+            workFile = null;                                       // new workspace has never been saved to a file
+
+            Workspace gameWorkspace = (Workspace) appTemplate.getWorkspaceComponent();
+            gameWorkspace.reinitialize();
+            enableGameButton();
+
+            //disable the save buttom
+            appTemplate.getGUI().getNewButton().setDisable(true);
+            start();
+
+        }
+
 
     }
 
@@ -458,11 +477,11 @@ public class HangmanController implements FileController {
                     makenew = true;
 
                 if (saveOrNot == 2){
-                    //makenew = false;
+                    makenew = false;
                     gameover = true;
                 }
                 if (saveOrNot == 0){
-                    makenew = false;
+                    //makenew = false;
                     gameover = false;
                     return false;
                 }
