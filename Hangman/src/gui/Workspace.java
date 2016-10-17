@@ -133,9 +133,9 @@ public class Workspace extends AppWorkspaceComponent {
         workspace = new VBox();
         workspace.getChildren().addAll(headPane, bodyPane, footToolbar);
 
-        gui.getWindow().setMaxHeight(690);
-        gui.getWindow().setMaxWidth(890);
-        gui.getWindow().setResizable(false);
+        gui.getWindow().setMaxHeight(720);
+        gui.getWindow().setMaxWidth(1000);
+        //gui.getWindow().setResizable(false);
     }
 
     private void setupHandlers() {
