@@ -331,9 +331,11 @@ public class HangmanController implements FileController {
             public void handle(long now) {
                 appTemplate.getGUI().getPrimaryScene().setOnKeyTyped((KeyEvent event) -> {
                     char guess = event.getCharacter().charAt(0);
+
                     if (!Character.isLetter(guess))
                         return;
 
+                    guess = Character.toLowerCase(guess);
 
 
 
