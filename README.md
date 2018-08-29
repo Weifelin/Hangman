@@ -11,4 +11,4 @@ This is a simple hangman game with the following function.
 
 -Handling illegal keys/Filtering the choice of target words.
 
-Some minor bug might still exist.
+I worked on this project in my early school years, some bugs might still exits.
